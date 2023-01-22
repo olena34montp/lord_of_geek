@@ -1,26 +1,7 @@
 <?php
 
-/**
- * Requetes sur les commandes
- *
- * @author Loic LOG
- */
 class M_Commande {
 
-    /**
-     * Crée une commande
-     *
-     * Crée une commande à partir des arguments validés passés en paramètre, l'identifiant est
-     * construit à partir du maximum existant ; crée les lignes de commandes dans la table contenir à partir du
-     * tableau d'idProduit passé en paramètre
-     * @param $nom
-     * @param $rue
-     * @param $cp
-     * @param $ville
-     * @param $mail
-     * @param $listJeux
-
-     */
     public static function creerCommande($nom, $rue, $cp, $ville, $mail, $listJeux) {
         $req = "insert into commandes(nomPrenomClient, adresseRueClient, cpClient, villeClient, mailClient) values ('$nom','$rue','$cp','$ville','$mail')";
         $res = AccesDonnees::exec($req);

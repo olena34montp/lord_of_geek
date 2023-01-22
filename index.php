@@ -12,10 +12,14 @@ require("./util/fonctions.inc.php");
 require('./util/validateurs.inc.php');
 require("./App/modele/AccesDonnees.php");
 
-
+$client = [];
 $uc = filter_input(INPUT_GET, 'uc'); // Use Case
 $action = filter_input(INPUT_GET, 'action'); // Action
 initPanier();
+
+if (!empty($_SESSION['client'])){
+    $client = $_SESSION['client'];
+}
 
 if (!$uc) {
     $uc = 'accueil';
@@ -31,6 +35,12 @@ switch ($uc) {
         break;
     case 'commander':
         include 'App/controleur/c_passerCommande.php';
+        break;
+    case 'authentication' :
+        include 'App/controleur/c_authentication.php';
+        break;
+    case 'inscription' :
+        include 'App/controleur/c_client.php';
         break;
     case 'administrer' :
         include 'App/controleur/c_monCompte.php';
