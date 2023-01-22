@@ -13,7 +13,16 @@ switch ($action) {
         } else {
             $_SESSION['client'] = $client;
         }
-        
+
+        if(!empty($_SESSION['redirect'])){
+            $redirect = $_SESSION['redirect'];
+            header('Location: index.php?uc=' . $redirect['us'] . '&action=' . $redirect['action']);
+            die();
+        } else {
+            header('Location: index.php');
+            die();
+        }
+
         break;
 
     case 'logoutClient':

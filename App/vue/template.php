@@ -15,8 +15,8 @@ Prototype de Lord Of Geek (LOG)
             <img src="public/images/logo.png" alt="Logo Lord Of Geek" />
             <div>
                 <?php
-                    if (!empty($client)){
-                        echo "<p>Bienvenue, ". $client['nom'] . " " . $client['prenom'] . "</p>";
+                    if (!empty($clientSession)){
+                        echo "<p>Bienvenue, ". $clientSession['nom'] . " " . $clientSession['prenom'] . "</p>";
                         echo "<a href='index.php?uc=authentication&action=logoutClient'> Se Deconnecter </a>";
                     }
                 ?>
@@ -27,10 +27,10 @@ Prototype de Lord Of Geek (LOG)
                     <li><a href="index.php?uc=accueil"> Accueil </a></li>
                     <li><a href="index.php?uc=visite&action=voirCategories"> Voir le catalogue de jeux </a></li>
                     <li><a href="index.php?uc=panier&action=voirPanier"> Voir son panier </a></li>
-                    <li><a href="index.php?uc=inscription"> Inscription </a></li>
                     <?php
-                        if (empty($client)) {
+                        if (empty($clientSession)) {
                             echo "<li><a href='index.php?uc=authentication'> Login </a></li>";
+                            echo "<li><a href='index.php?uc=inscription'> Inscription </a></li>";
                         }
                     ?>
                     <li><a href="index.php?uc=compte"> Mon compte </a></li>
@@ -51,9 +51,6 @@ Prototype de Lord Of Geek (LOG)
                     break;
                 case 'panier' :
                     include("App/vue/v_panier.php");
-                    break;
-                case 'commander':
-                    include ("App/vue/v_commande.php");
                     break;
                 case 'inscription':
                     include ("App/vue/v_inscription.php");

@@ -12,13 +12,18 @@ require("./util/fonctions.inc.php");
 require('./util/validateurs.inc.php');
 require("./App/modele/AccesDonnees.php");
 
-$client = [];
+$clientSession = [];
 $uc = filter_input(INPUT_GET, 'uc'); // Use Case
 $action = filter_input(INPUT_GET, 'action'); // Action
 initPanier();
 
+if (!empty($_GET['redirect']))
+{
+    $_SESSION['redirect'] = $_GET['redirect'];
+}
+
 if (!empty($_SESSION['client'])){
-    $client = $_SESSION['client'];
+    $clientSession = $_SESSION['client'];
 }
 
 if (!$uc) {
@@ -34,7 +39,7 @@ switch ($uc) {
         include 'App/controleur/c_gestionPanier.php';
         break;
     case 'commander':
-        include 'App/controleur/c_passerCommande.php';
+        include 'App/controleur/c_commander.php';
         break;
     case 'authentication' :
         include 'App/controleur/c_authentication.php';

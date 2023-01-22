@@ -15,7 +15,7 @@ class M_Exemplaire {
      * @return un tableau associatif
      */
     public static function trouveLesJeuxDeCategorie($idCategorie) {
-        $req = "SELECT * FROM exemplaires WHERE categorie_id = '$idCategorie'";
+        $req = "SELECT * FROM exemplaires WHERE categorie_id = '$idCategorie' AND statut = 'disponible'";
         $res = AccesDonnees::query($req);
         $lesLignes = $res->fetchAll();
         return $lesLignes;
@@ -32,7 +32,7 @@ class M_Exemplaire {
         $lesProduits = array();
         if ($nbProduits != 0) {
             foreach ($desIdJeux as $unIdProduit) {
-                $req = "SELECT * FROM exemplaires WHERE id = '$unIdProduit'";
+                $req = "SELECT * FROM exemplaires WHERE id = '$unIdProduit' AND statut = 'disponible'";
                 $res = AccesDonnees::query($req);
                 $unProduit = $res->fetch();
                 $lesProduits[] = $unProduit;
