@@ -41,4 +41,11 @@ class M_Exemplaire {
         return $lesProduits;
     }
 
+    public static function trouverTousJeux(){
+        $req = "SELECT * FROM exemplaires WHERE statut = 'disponible'";
+        $res = AccesDonnees::query($req);
+        $lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
+        return $lesLignes;
+    }
+
 }

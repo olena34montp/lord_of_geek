@@ -21,10 +21,14 @@
             $description = $unJeu['description'];
             $prix = $unJeu['prix'];
             $image = $unJeu['image'];
+            $etat = $unJeu['etat'];
+            $statut = $unJeu['statut'];
             ?>
             <article>
                 <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>"/>
-                <p><?= $description ?></p>
+                <p>Nom : <?= $description ?></p>
+                <p>Etait : <?= $etat ?></p>
+                <p>Statut : <?= $statut?></p>
                 <p><?= "Prix : " . $prix . " Euros" ?>
                     <a href="index.php?uc=visite&categorie=<?= $categorie ?>&jeu=<?= $id ?>&action=ajouterAuPanier">
                         <img src="public/images/mettrepanier.png" title="Ajouter au panier" class="add"/>

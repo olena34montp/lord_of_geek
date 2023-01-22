@@ -6,12 +6,15 @@
         $description = $unJeu['description'];
         $image = $unJeu['image'];
         $prix = $unJeu['prix'];
+        $etat = $unJeu['etat'];
+        $statut = $unJeu['statut'];
         ?>
         <p>
             <img src="public/images/jeux/<?php echo $image ?>" alt=image width=100 height=100 />
-            <?php
-            echo $description . "($prix Euros)";
-            ?>	
+            <p>Nom : <?= $description ?></p>
+            <p>Etait : <?= $etat ?></p>
+            <p>Statut : <?= $statut?></p>
+            <p><?= "Prix : " . $prix . " Euros" ?>
             <a href="index.php?uc=panier&jeu=<?php echo $id ?>&action=supprimerUnJeu" onclick="return confirm('Voulez-vous vraiment retirer ce jeu ?');">
                 <img src="public/images/retirerpanier.png" TITLE="Retirer du panier" >
             </a>
