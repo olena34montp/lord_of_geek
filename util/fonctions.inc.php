@@ -96,5 +96,5 @@ function afficheErreurs(array $msgErreurs) {
  * @param string $msg
  */
 function afficheMessage(string $msg) {
-    echo '﻿<div class="message">'.$msg.'</div>';
+    $_SESSION['error'] = $msg;
 }

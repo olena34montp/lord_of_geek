@@ -17,8 +17,7 @@ $uc = filter_input(INPUT_GET, 'uc'); // Use Case
 $action = filter_input(INPUT_GET, 'action'); // Action
 initPanier();
 
-if (!empty($_GET['redirect']))
-{
+if (!empty($_GET['redirect'])){
     $_SESSION['redirect'] = $_GET['redirect'];
 }
 
@@ -47,7 +46,7 @@ switch ($uc) {
     case 'inscription' :
         include 'App/controleur/c_client.php';
         break;
-    case 'administrer' :
+    case 'compte' :
         include 'App/controleur/c_monCompte.php';
         break;
     default:

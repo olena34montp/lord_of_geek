@@ -1,5 +1,5 @@
 <section id="compte">
-    <a href="">Mes commandes</a>
+    <p><strong>Mes jeux:</strong></p>
     <table class="commandes">
         <thead>
             <tr>
@@ -12,42 +12,55 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>The Legend of zelda sur NES</td>
-                <td>30.00</td>
-                <td>Aventure</td>
-                <td>bon</td>
-                <td>commande</td>
-            </tr>
+            <?php
+                $counter = 1;
+                foreach ($lesCommandes as $uneCommande) {
+                    $description = $uneCommande['description'];
+                    $prix = $uneCommande['prix'];
+                    $nomCategorie = $uneCommande['nom'];
+                    $etat = $uneCommande['etat'];
+                    $statut = $uneCommande['statut'];
+                    ?>
+                    <tr>
+                    <td><?= $counter;?></td>
+                    <td><?= $description;?></td>
+                    <td><?= $prix;?></td>
+                    <td><?= $nomCategorie;?></td>
+                    <td><?= $etat;?></td>
+                    <td><?= $statut;?></td>
+                </tr>
+                    <?php
+                    $counter++;
+                }
+            ?>
         </tbody>
     </table>
-    <form method="POST" action=""> <!--action="index.php?uc=commander&action=confirmerCommande"-->
+    <form method="POST" action="index.php?uc=compte&action=changerProfil"> 
         <fieldset>
             <legend>Mon copmte</legend>
             <p>
                 <label for="nom">Nom</label>
-                <input id="nom" type="text" name="nom" value="<?= $nom ?>" maxlength="90">
+                <input id="nom" type="text" name="nom" value="<?= $clientSession['nom'] ?>" maxlength="90">
             </p>
             <p>
                 <label for="prenom">Prenom</label>
-                <input id="prenom" type="text" name="prenom" value="<?= $prenom ?>" maxlength="90">
+                <input id="prenom" type="text" name="prenom" value="<?= $clientSession['prenom'] ?>" maxlength="90">
             </p>
             <p>
                 <label for="ville">Ville</label>
-                <input id="ville" type="text" name="ville"  value="<?= $ville ?>" maxlength="45">
+                <input id="ville" type="text" name="ville" value="<?= $clientSession['nom_ville']?>" maxlength="45">
             </p>
             <p>
                 <label for="cp">Code postal</label>
-                <input id="cp" type="text" name="cp" value="<?= $cp ?>" size="5" maxlength="5">
+                <input id="cp" type="text" name="cp" value="<?= $clientSession['cp'] ?>" size="5" maxlength="5">
             </p>
             <p>
                 <label for="rue">Rue</label>
-                <input id="rue" type="text" name="rue" value="<?= $rue ?>" maxlength="255">
+                <input id="rue" type="text" name="rue" value="<?= $clientSession['adresse_rue']?>" maxlength="255">
             </p>
             <p>
                 <label for="mail">Email </label>
-                <input id="mail" type="text"  name="mail" value="<?= $mail ?>" maxlength="100">
+                <input id="mail" type="text"  name="mail" value="<?= $clientSession['email'] ?>" maxlength="100">
             </p> 
             <p>
                 <input type="submit" value="Valider" name="Valider">

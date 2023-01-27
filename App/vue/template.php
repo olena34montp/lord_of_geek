@@ -32,14 +32,21 @@ Prototype de Lord Of Geek (LOG)
                             echo "<li><a href='index.php?uc=authentication'> Login </a></li>";
                             echo "<li><a href='index.php?uc=inscription'> Inscription </a></li>";
                         }
+                        if (!empty($clientSession)) {
+                            echo "<li><a href='index.php?uc=compte'> Mon compte </a></li>";
+                        }
                     ?>
-                    <li><a href="index.php?uc=compte"> Mon compte </a></li>
                 </ul>
             </nav>
 
         </header>
         <main>
+
             <?php
+            if(!empty($_SESSION['error'])){
+                echo '﻿<div class="message">'.$_SESSION['error'].'</div>';
+                unset($_SESSION['error']);
+            }
             // Controleur de vues
             // Selon le cas d'utilisation, j'inclus un controleur ou simplement une vue
             switch ($uc) {
