@@ -8,7 +8,7 @@
             </p>
             <p>
                 <label for="password">Mot de passe</label>
-                <input id="password" type="password" name="password" minlength="6" maxlength="90">
+                <input id="password" type="password" name="password" minlength="8" maxlength="90">
             </p>
             <p>
                 <input type="submit" value="Valider" name="Valider">

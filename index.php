@@ -17,9 +17,9 @@ $uc = filter_input(INPUT_GET, 'uc'); // Use Case
 $action = filter_input(INPUT_GET, 'action'); // Action
 initPanier();
 
-if (!empty($_GET['redirect'])){
-    $_SESSION['redirect'] = $_GET['redirect'];
-}
+// if (!empty($_GET['redirect'])){
+//     $_SESSION['redirect'] = filter_input(INPUT_GET, 'redirect');
+// }
 
 if (!empty($_SESSION['client'])){
     $clientSession = $_SESSION['client'];

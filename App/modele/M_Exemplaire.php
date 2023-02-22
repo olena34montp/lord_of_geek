@@ -15,9 +15,14 @@ class M_Exemplaire {
      * @return un tableau associatif
      */
     public static function trouveLesJeuxDeCategorie($idCategorie) {
-        $req = "SELECT * FROM exemplaires WHERE categorie_id = '$idCategorie' AND statut = 'disponible'";
-        $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+        $pdo = AccesDonnees::getPdo();
+        $stmt = $pdo->prepare(
+            "SELECT * 
+            FROM exemplaires 
+            WHERE categorie_id = :idCategorie AND statut = 'disponible'");
+        $stmt->bindParam(':idCategorie', $idCategorie, PDO::PARAM_INT);
+        $stmt->execute();
+        $lesLignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
 
@@ -32,9 +37,15 @@ class M_Exemplaire {
         $lesProduits = array();
         if ($nbProduits != 0) {
             foreach ($desIdJeux as $unIdProduit) {
-                $req = "SELECT * FROM exemplaires WHERE id = '$unIdProduit' AND statut = 'disponible'";
-                $res = AccesDonnees::query($req);
-                $unProduit = $res->fetch();
+                $pdo = AccesDonnees::getPdo();
+                $stmt = $pdo->prepare(
+                    "SELECT * 
+                    FROM exemplaires 
+                    WHERE id = :id AND statut = 'disponible'");
+                $stmt->bindParam(':id', $unIdProduit, PDO::PARAM_INT);
+                $stmt->execute();
+                $unProduit = $stmt->fetch(PDO::FETCH_ASSOC);
+
                 $lesProduits[] = $unProduit;
             }
         }

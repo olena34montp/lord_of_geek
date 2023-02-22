@@ -3,7 +3,7 @@
     <table class="commandes">
         <thead>
             <tr>
-                <th>Numero</th>
+                <th>Numero de commande</th>
                 <th>Nom de jeu</th>
                 <th>Prix</th>
                 <th>Categorie</th>
@@ -13,8 +13,8 @@
         </thead>
         <tbody>
             <?php
-                $counter = 1;
                 foreach ($lesCommandes as $uneCommande) {
+                    $numeroDeCommande = $uneCommande['commande_id'];
                     $description = $uneCommande['description'];
                     $prix = $uneCommande['prix'];
                     $nomCategorie = $uneCommande['nom'];
@@ -22,7 +22,7 @@
                     $statut = $uneCommande['statut'];
                     ?>
                     <tr>
-                    <td><?= $counter;?></td>
+                    <td><?= $numeroDeCommande;?></td>
                     <td><?= $description;?></td>
                     <td><?= $prix;?></td>
                     <td><?= $nomCategorie;?></td>
@@ -30,11 +30,13 @@
                     <td><?= $statut;?></td>
                 </tr>
                     <?php
-                    $counter++;
                 }
             ?>
         </tbody>
     </table>
+    <ul>
+        
+    </ul>
     <form method="POST" action="index.php?uc=compte&action=changerProfil"> 
         <fieldset>
             <legend>Mon copmte</legend>

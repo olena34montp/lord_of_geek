@@ -25,12 +25,11 @@ switch ($action) {
             afficheErreurs($erreurs);
         } else {
             afficheMessage("Vous avez enregistré vos changementes");
+            $_SESSION['client'] = M_Client::trouverClientParId($clientSession['id']);
+        
+            header('Location: index.php?uc=compte');
+            die();
         }
-        
-        $_SESSION['client'] = M_Client::trouverClientParId($clientSession['id']);
-        
-        header('Location: index.php?uc=compte');
-        die();
         
         break;
 

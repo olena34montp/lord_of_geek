@@ -15,7 +15,7 @@ class M_Categorie {
     public static function trouveLesCategories() {
         $req = "SELECT * FROM categories";
         $res = AccesDonnees::query($req);
-        $lesLignes = $res->fetchAll();
+        $lesLignes = $res->fetchAll(PDO::FETCH_ASSOC);
         return $lesLignes;
     }
 

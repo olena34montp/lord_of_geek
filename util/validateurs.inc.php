@@ -37,4 +37,8 @@ function estUnMail($mail) {
     return preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$#', $mail);
 }
 
+function estUnPassword($password) {
+    return preg_match('/(?=^.{8,}$)((?=.*\d)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z])(?=.*[$&+,:;=?@#_-]).*$/', $password);
+}
+
 
