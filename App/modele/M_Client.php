@@ -2,6 +2,20 @@
 
 class M_Client {
 
+    /**
+     * Crée une ligne dans la table client avec les informations en paramètre
+     * Les informations sont vérifiés par la fonction estValide()
+     *
+     * @param string $identifiant
+     * @param string $password
+     * @param string $nom
+     * @param string $prenom
+     * @param string $ville
+     * @param int $cp
+     * @param string $rue
+     * @param string $mail
+     * @return array en cas d'erreurs
+     */
     public static function creerClient($identifiant, $password, $nom, $prenom, $ville, $cp, $rue, $mail) {
         if($erreurs = static::estValide($identifiant, $password, $nom, $prenom, $ville, $cp, $rue, $mail)){
             return $erreurs;
@@ -12,7 +26,7 @@ class M_Client {
         $stmt = $pdo->prepare(
             "INSERT INTO client(identifiant, mot_de_passe, nom, prenom, nom_ville, cp, adresse_rue, email) 
             VALUES (:identifiant, :password, :nom, :prenom, :ville, :cp, :rue, :mail)");
-        $stmt->bindParam(":identifiant", $identifiant, PDO::PARAM_INT);
+        $stmt->bindParam(":identifiant", $identifiant, PDO::PARAM_STR);
         $stmt->bindParam(":password", $password, PDO::PARAM_STR);
         $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
         $stmt->bindParam(":prenom", $prenom, PDO::PARAM_STR);
@@ -23,11 +37,19 @@ class M_Client {
         $stmt->execute();
     }
     
+
     public static function lastClient(){
         $idClient = AccesDonnees::getPdo()->lastInsertId();
         return $idClient;
     }
 
+    /**
+     * Cherche les informations d'un client dans la base de donnée
+     * via son id
+     *
+     * @param int $idClient
+     * @return array
+     */
     public static function trouverClientParId($idClient){
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare(
@@ -39,14 +61,21 @@ class M_Client {
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
         return $client;
     }
-    
+    /**
+     * Cherche les infos d'un client dans la base de donnée 
+     * via son identifiant et son mot de passe
+     *
+     * @param string $identifiant
+     * @param string $password
+     * @return array
+     */
     public static function trouverClientParIdentifiantEtMDP($identifiant, $password){
         $pdo = AccesDonnees::getPdo();
         $stmt = $pdo->prepare(
             "SELECT * 
             FROM client 
             WHERE identifiant = :identifiant");
-        $stmt->bindParam(":identifiant", $identifiant, PDO::PARAM_INT);
+        $stmt->bindParam(":identifiant", $identifiant, PDO::PARAM_STR);
         $stmt->execute();
         $client = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -55,13 +84,21 @@ class M_Client {
         }
 
         return false;
-        //$req = "select * from client where identifiant = '$identifiant' AND mot_de_passe = '$password'";
-        //$res = AccesDonnees::query($req);
-        //$client = $res->fetch(PDO::FETCH_ASSOC);
-        //var_dump(AccesDonnees::getPdo()->errorInfo());
-        //return $client;
     }
-
+/**
+ * Modifie les informations contenues dans la table client
+ * selon les informations saisies par l'utilisateur et validés par la fonction:
+ * estValideProfil()
+ * 
+ * @param int $idClient
+ * @param string $nom
+ * @param string $prenom
+ * @param string $ville
+ * @param int $cp
+ * @param string $rue
+ * @param string $mail
+ * @return array en cas d'erreurs
+ */
     public static function changerClientInfo($idClient, $nom, $prenom, $ville, $cp, $rue, $mail){
         if($erreurs = static::estValideProfil($nom, $prenom, $ville, $cp, $rue, $mail)){
             return $erreurs;
@@ -87,7 +124,20 @@ class M_Client {
         $stmt->execute();
     }
     
-
+/**
+ * Valide les informations saisis par l'utilisateur lors de l'inscription
+ * return un tableau avec les erreurs rencontrés
+ *
+ * @param int $identifiant
+ * @param string $password
+ * @param string $nom
+ * @param string $prenom
+ * @param string $ville
+ * @param int $cp
+ * @param string $rue
+ * @param string $mail
+ * @return array
+ */
     public static function estValide($identifiant, $password, $nom, $prenom, $ville, $cp, $rue, $mail) {
         $erreurs = [];
         if ($identifiant == "") {
@@ -118,11 +168,23 @@ class M_Client {
         if ($mail == "") {
             $erreurs[] = "Il faut saisir le champ mail";
         } else if (!estUnMail($mail)) {
-            $erreurs[] = "Erreur de mail. Le symbol @ - est obligatoire. (Example d'un mail - example@example.com)";
+            $erreurs[] = "Erreur de mail. Le symbol @ - est obligatoire. (Exemple d'un mail - example@example.com)";
         }
         return $erreurs;
     }
 
+    /**
+     * Vérifie les informations que l'utilisateur souhaite modifier
+     * return un tableau avec les erreurs rencontrés
+     *
+     * @param string $nom
+     * @param string $prenom
+     * @param string $ville
+     * @param int $cp
+     * @param string $rue
+     * @param string $mail
+     * @return array
+     */
     public static function estValideProfil($nom, $prenom, $ville, $cp, $rue, $mail) {
         $erreurs = [];
         if ($nom == "") {
@@ -145,7 +207,7 @@ class M_Client {
         if ($mail == "") {
             $erreurs[] = "Il faut saisir le champ mail";
         } else if (!estUnMail($mail)) {
-            $erreurs[] = "Erreur de mail. Le symbol @ - est obligatoire. (Example d'un mail - example@example.com)";
+            $erreurs[] = "Erreur de mail. Le symbol @ - est obligatoire. (Exemple d'un mail - example@example.com)";
         }
         return $erreurs;
     }

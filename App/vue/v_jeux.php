@@ -23,9 +23,7 @@
             $image = $unJeu['image'];
             $etat = $unJeu['etat'];
             $statut = $unJeu['statut'];
-            // echo "<pre>";
-            // var_dump($unJeu);
-            // echo "</pre>";
+
             ?>
             <article>
                 <img src="public/images/jeux/<?= $image ?>" alt="Image de <?= $description; ?>"/>

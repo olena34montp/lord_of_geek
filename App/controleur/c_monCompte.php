@@ -1,7 +1,6 @@
 <?php
 include 'App/modele/M_Commande.php';
 include 'App/modele/M_Client.php';
-//! TODO
 
 
 //Affichage des commandes

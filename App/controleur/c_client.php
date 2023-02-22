@@ -17,7 +17,7 @@ switch ($action) {
         if ($erreurs) {
             afficheErreurs($erreurs);
         } else {
-            afficheMessage("Vous avez enregistré");
+            afficheMessage("Inscription réussie");
         }
 
         break;

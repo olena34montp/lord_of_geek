@@ -10,7 +10,7 @@ class M_Categorie {
     /**
      * Retourne toutes les catégories sous forme d'un tableau associatif
      *
-     * @return le tableau associatif des catégories
+     * @return array tableau associatif des catégories
      */
     public static function trouveLesCategories() {
         $req = "SELECT * FROM categories";
